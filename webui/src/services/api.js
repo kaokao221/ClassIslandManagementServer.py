@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 
 const API_BASE = process.env.VUE_APP_CIMS_API_BASE + '/api/v1';
