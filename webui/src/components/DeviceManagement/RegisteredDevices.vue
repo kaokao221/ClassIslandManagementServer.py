@@ -47,8 +47,9 @@
             <DeviceBulkActions
               :selected-clients="selectedClients"
               @clients-restarted="refreshClients"
-              @notifications-sent="refreshClients"  // 假设刷新列表后更新状态
+              @notifications-sent="refreshClients"  
             />
+            <!-- 假设刷新列表后更新状态 -->
           </v-card-actions>
         </v-card>
       </v-col>

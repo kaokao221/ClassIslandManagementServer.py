@@ -8,8 +8,9 @@
     <v-img
       class="mx-auto mt-4"
       max-width="100"
-      src="@/assets/logo.png"  // 假设 logo.png 放在 assets 目录下
+      src="@/assets/logo.png" 
     ></v-img>
+    <!-- 假设 logo.png 放在 assets 目录下 -->
     <v-list nav dense>
       <v-subheader>ClassIsland 集控控制台</v-subheader>
       <v-list-item link to="/overview">

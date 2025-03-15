@@ -27,9 +27,9 @@ match sys.platform:
             default_sets = json.load(s)
             Datas.DefaultSettings.write("default", default_sets)
         os.system("python -m venv venv")
-        os.system("./venv/Scripts/pip install -r requirements.txt")
-        os.system("./venv/bin/python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. ./Protobuf/Client/ClientCommandDeliverScReq.proto ./Protobuf/Client/ClientRegisterCsReq.proto ./Protobuf/Command/HeartBeat.proto ./Protobuf/Command/SendNotification.proto ./Protobuf/Enum/CommandTypes.proto ./Protobuf/Enum/Retcode.proto ./Protobuf/Server/ClientCommandDeliverScRsp.proto ./Protobuf/Server/ClientRegisterScRsp.proto ./Protobuf/Service/ClientCommandDeliver.proto ./Protobuf/Service/ClientRegister.proto")
-        os.system("./venv/bin/python CIMS.py")
+        os.system(".\\.venv\\Scripts\\pip install -r requirements.txt")
+        os.system(".\\.venv\\bin\\python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. ./Protobuf/Client/ClientCommandDeliverScReq.proto ./Protobuf/Client/ClientRegisterCsReq.proto ./Protobuf/Command/HeartBeat.proto ./Protobuf/Command/SendNotification.proto ./Protobuf/Enum/CommandTypes.proto ./Protobuf/Enum/Retcode.proto ./Protobuf/Server/ClientCommandDeliverScRsp.proto ./Protobuf/Server/ClientRegisterScRsp.proto ./Protobuf/Service/ClientCommandDeliver.proto ./Protobuf/Service/ClientRegister.proto")
+        os.system(".\\.venv\\bin\\python CIMS.py")
     case "linux":
         with open("settings.json", "w") as f:
             gRPC_port = input("gRPC 服务端口, 默认为 50051:")
