@@ -22,44 +22,62 @@
     ```
     *   如果你不使用 Git，可以下载 ZIP 压缩包并解压。
 3.  **创建 venv 并安装依赖:**
+    ### 使用 uv （推荐）
     ```bash
-    python -m venv venv
-    ./venv/bin/python -m pip install -r requirements.txt
-    # Windows 环境
+    uv venv
+    ./.venv/Scripts/activate # 进入venv
+    uv pip install -r requirements.txt
     ```
-    ```bash
-    python3 -m venv venv
-    ./venv/bin/python3 -m pip install -r requirements.txt
-    # Linux 环境
-    ```
-    在 Linux 环境中，可能出现 venv / pip 不可用报错，请根据相关提示从命令行安装 venv 和 pip 后重新创建虚拟环境并安装依赖。
+
+    > ### 传统方法
+    > ```bash
+    > python -m venv venv
+    > ./venv/bin/python -m pip install -r requirements.txt
+    > # Windows 环境
+    > ```
+    > ```bash
+    > python3 -m venv venv
+    > ./venv/bin/python3 -m pip install -r requirements.txt
+    > # Linux 环境
+    > ```
+    > 在 Linux 环境中，可能出现 venv / pip 不可用报错，请根据相关提示从命令行安装 venv 和 pip 后重新创建虚拟环境并安装依赖。
 4. **构建 Protobuf 文件:**
+    此步骤需要在venv中进行
     ```bash
-    ./venv/bin/python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. ./Protobuf/Client/ClientCommandDeliverScReq.proto ./Protobuf/Client/ClientRegisterCsReq.proto ./Protobuf/Command/HeartBeat.proto ./Protobuf/Command/SendNotification.proto ./Protobuf/Enum/CommandTypes.proto ./Protobuf/Enum/Retcode.proto ./Protobuf/Server/ClientCommandDeliverScRsp.proto ./Protobuf/Server/ClientRegisterScRsp.proto ./Protobuf/Service/ClientCommandDeliver.proto ./Protobuf/Service/ClientRegister.proto
+    python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. ./Protobuf/Client/ClientCommandDeliverScReq.proto ./Protobuf/Client/ClientRegisterCsReq.proto ./Protobuf/Command/HeartBeat.proto ./Protobuf/Command/SendNotification.proto ./Protobuf/Enum/CommandTypes.proto ./Protobuf/Enum/Retcode.proto ./Protobuf/Server/ClientCommandDeliverScRsp.proto ./Protobuf/Server/ClientRegisterScRsp.proto ./Protobuf/Service/ClientCommandDeliver.proto ./Protobuf/Service/ClientRegister.proto
     # Windows 环境
     ```
     ```bash
-    ./venv/bin/python3 -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. ./Protobuf/Client/ClientCommandDeliverScReq.proto ./Protobuf/Client/ClientRegisterCsReq.proto ./Protobuf/Command/HeartBeat.proto ./Protobuf/Command/SendNotification.proto ./Protobuf/Enum/CommandTypes.proto ./Protobuf/Enum/Retcode.proto ./Protobuf/Server/ClientCommandDeliverScRsp.proto ./Protobuf/Server/ClientRegisterScRsp.proto ./Protobuf/Service/ClientCommandDeliver.proto ./Protobuf/Service/ClientRegister.proto
+    python3 -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. ./Protobuf/Client/ClientCommandDeliverScReq.proto ./Protobuf/Client/ClientRegisterCsReq.proto ./Protobuf/Command/HeartBeat.proto ./Protobuf/Command/SendNotification.proto ./Protobuf/Enum/CommandTypes.proto ./Protobuf/Enum/Retcode.proto ./Protobuf/Server/ClientCommandDeliverScRsp.proto ./Protobuf/Server/ClientRegisterScRsp.proto ./Protobuf/Service/ClientCommandDeliver.proto ./Protobuf/Service/ClientRegister.proto
     # Linux 环境
     ```
     这将会构建 `.proto` 文件生成对应的 Python 代码，以用于 gRPC 通信。
 5.  **构建 WebUI (可选):**
     *   如果你不需要 WebUI，可以跳过此步骤。
+    *   安装NodeJS和pnpm （如果以安装可以跳过）
+
+        Window:
+        ```bash
+        winget install nodejs
+        # 重启终端
+        corepack enable # 安装pnpm等工具
+        ```
+        Linux: 使用发行版的包管理工具安装nodejs，其他步骤与windows大体相同
     *   导航到 `webui` 目录:
         ```bash
         cd webui
         ```
     *   安装 WebUI 依赖:
         ```bash
-        npm install
+        pnpm install
         ```
     *   构建 WebUI:
         ```bash
-        npm run build
+        pnpm build
         ```
     *   运行 WebUI:
         ```bash
-        npm run preview
+        pnpm run preview
         ```
     *   构建完成后，将生成 `dist` 文件夹，其中包含构建后的 WebUI 文件。
     *   构建出的 WebUI 文件会被内置于集控服务器中，无需手动部署。
